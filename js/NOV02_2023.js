@@ -85,7 +85,10 @@ function mostrarLetrasUtilizadas(letrasUtilizadas) {
 
 
 function esLetra(caracter) {
-    let codigoAscii = caracter.charCodeAt(0);
+    let codigoAscii;
+    if(caracter.length==1){
+        codigoAscii = caracter.charCodeAt(0);
+    }
     return (codigoAscii >= 65 && codigoAscii <= 90) || (codigoAscii >= 97 && codigoAscii <= 122);//verififca que las letras sean letras
 }
 /*__________________________________________________________________________________________________________________________________ */
