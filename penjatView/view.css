@@ -1,11 +1,25 @@
 body{
-    background-color: azure;
+    background-color: rgb(235, 230, 214);
+}
+#cabeza{
+    text-align: center;
+}
+#iniciar{
+    text-align: center;;
 }
 
 #iniciar_juego{
     padding: 10px 20px;
     background-color: #4CAF50;
     color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#estadisticas{
+    padding: 10px 20px;
+    background-color: #3ca4ac;
+    color: black;
     border: none;
     border-radius: 5px;
     cursor: pointer;
