@@ -4,15 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <Script src="js/NOV02_2023.js"></Script>
+    <link rel="stylesheet" src="view.css">
     <title>Practica evaluativa</title>
 </head>
 <body>
     <div>
-        <h1>Ejercicio_1</h1>
-        <h3>Implementar el juego del colgado segun las indicaciones del enunciado en el moodle </h3>
-    
-        <button onclick="mostrarMenu()"> CLICK </button>
-        </div>
-    
+        <h1>Joc Penjat</h1>
+        <h3></h3>
+    <div id="iniciar">
+        <button id="iniciar_juego" onclick="iniciarJoc()"> Iniciar Joc </button>
+        <button id="estadisticas" onclick="mostraEstadistica()"> Estadisticas </button>
+    </div>
+    <div id="jocPenjat"></div>
+    <div id="abecedari"></div>
+    <img src="" id="imatgePenjat" />
+    <div id="lletresUtilitzades"></div>
 </body>
 </html>

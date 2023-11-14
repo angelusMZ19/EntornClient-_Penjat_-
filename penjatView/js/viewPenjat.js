@@ -26,18 +26,21 @@ function mostrarMenu() {
 function iniciarJoc() {
     console.log("Has seleccionat iniciar un joc.");
     let palabra = prompt("Ingrese una palabra"); // Ingresa la palabra
-    //modificado a partir de aqui
+
     let palabraOculta;
     if(!esPalabra(palabra)){
         console.log("porfavor ingrese una palabra valida");
         palabra = prompt("Ingrese una palabra");
     }else{
             console.log("que empice el juego");
-            palabraOculta = "_".repeat(palabra.length).split("");
+            palabraOculta = encriptaPalabra(palabra);
         let letrasUtilizadas = "";
         let intentos = 6;
     
             while (palabraOculta.includes('_') && intentos > 0) {
+
+                jugadas++;
+
                 mostrarPalabraOculta(palabraOculta);
                 mostrarLetrasUtilizadas(letrasUtilizadas);
                 
@@ -66,11 +69,14 @@ function iniciarJoc() {
         perdidas++;
     }
 }
-    jugadas++;
+
 }
 
 /*__________________________________________________________________________________________________________________________________ */
-
+function encriptaPalabra(palabra) {
+    let palabraOculta="_".repeat(palabra.length).split("");
+    return palabraOculta
+}
 
 function mostrarPalabraOculta(palabraOculta) {
     console.log(palabraOculta.join(" "));
@@ -128,11 +134,10 @@ function mostrarEstadisticas() {
 }
 /*__________________________________________________________________________________________________________________________________ */
 
-
-function calcularPorcentaje() {
-    if (jugadas > 0) {
-        return (ganadas / jugadas * 100).toFixed(2);
-    } else if (ganadas === 0) {
+function calcularPorcentaje(valor, total) {
+    if (total > 0) {
+        return ((valor / total) * 100).toFixed(2);
+    } else if (valor === 0) {
         return "0.00";
     } else {
         return "N/A";
