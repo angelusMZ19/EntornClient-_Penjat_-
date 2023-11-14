@@ -33,7 +33,7 @@ function iniciarJoc() {
         palabra = prompt("Ingrese una palabra");
     }else{
             console.log("que empice el juego");
-            palabraOculta = "_".repeat(palabra.length).split("");
+            palabraOculta = encriptaPalabra(palabra);
         let letrasUtilizadas = "";
         let intentos = 6;
     
@@ -73,7 +73,10 @@ function iniciarJoc() {
 }
 
 /*__________________________________________________________________________________________________________________________________ */
-
+function encriptaPalabra(palabra) {
+    let palabraOculta= "_".repeat(palabra.length).split("");
+    return palabraOculta
+}
 
 function mostrarPalabraOculta(palabraOculta) {
     console.log(palabraOculta.join(" "));
