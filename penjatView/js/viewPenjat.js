@@ -22,17 +22,16 @@ function mostrarMenu() {
 }
 
 /*__________________________________________________________________________________________________________________________________ */
-
 function iniciarJoc() {
-    console.log("Has seleccionat iniciar un joc.");
+    alert("Has seleccionat iniciar un joc.");
     let palabra = prompt("Ingrese una palabra"); // Ingresa la palabra
 
     let palabraOculta;
     if(!esPalabra(palabra)){
-        console.log("porfavor ingrese una palabra valida");
+        alert("porfavor ingrese una palabra valida");
         palabra = prompt("Ingrese una palabra");
     }else{
-            console.log("que empice el juego");
+            alert("que empice el juego");
             palabraOculta = encriptaPalabra(palabra);
         let letrasUtilizadas = "";
         let intentos = 6;
@@ -48,7 +47,7 @@ function iniciarJoc() {
                 
                 if (esLetra(letra)) {
                     if (letrasUtilizadas.includes(letra)) {
-                        console.log("Ya has intentado esa letra. Intenta con otra.");
+                        alert("Ya has intentado esa letra. Intenta con otra.");
                         continue;
                     }
                     if (!palabra.includes(letra)) {
@@ -57,15 +56,15 @@ function iniciarJoc() {
                     letrasUtilizadas += letra;
                     remplazarLetra(letra, palabra, palabraOculta);
                 } else {
-                    console.log("Por favor, ingresa una letra válida.");
+                    alert("Por favor, ingresa una letra válida.");
                 }
-                console.log("Intentos restantes:" + intentos);
+                alert("Intentos restantes:" + intentos);
             }
     if (!palabraOculta.includes('_')) {
-        console.log("¡Felicidades! Has adivinado la palabra: " + palabra);
+        alert("¡Felicidades! Has adivinado la palabra: " + palabra);
         ganadas++;
     } else {
-        console.log("¡Oh no! Se acabaron los intentos. La palabra era: " + palabra);
+        alert("¡Oh no! Se acabaron los intentos. La palabra era: " + palabra);
         perdidas++;
     }
 }
