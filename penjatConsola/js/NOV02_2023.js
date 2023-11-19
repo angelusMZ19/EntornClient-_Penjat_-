@@ -26,7 +26,7 @@ function mostrarMenu() {
 function iniciarJoc() {
     console.log("Has seleccionat iniciar un joc.");
     let palabra = prompt("Ingrese una palabra"); // Ingresa la palabra
-
+    jugadas++;
     let palabraOculta;
     if(!esPalabra(palabra)){
         console.log("porfavor ingrese una palabra valida");
@@ -39,7 +39,7 @@ function iniciarJoc() {
     
             while (palabraOculta.includes('_') && intentos > 0) {
 
-                jugadas++;
+                
 
                 mostrarPalabraOculta(palabraOculta);
                 mostrarLetrasUtilizadas(letrasUtilizadas);
