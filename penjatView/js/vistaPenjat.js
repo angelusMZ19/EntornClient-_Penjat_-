@@ -4,40 +4,37 @@ let jugadas=0;
 
 /*____________________________________________________________________________*/
 
-function iniciarJoc() {
-    // alert("Has seleccionat iniciar un joc.");
+function novaPartida() {
     let palabra = prompt("Ingrese una palabra"); 
+    jugadas++;
+    //localStorage(setItem('partidas'+ jugadas))
     let palabraOculta;
     if(!esPalabra(palabra)){
         alert("porfavor ingrese una palabra valida");
         palabra = prompt("Ingrese una palabra");
     }else{
             alert("que empice el juego");
-
-            palabraOculta = encriptaPalabra(palabra);
-            encriptaPalabra(palabra);
+            palabraOculta=encriptaPalabra(palabra);
             crearBoton();
-        let letrasUtilizadas = "";
-        let intentos = 6;
-        while (palabraOculta.includes('_') && intentos > 0) {
-
-            jugadas++;
-
-            mostrarPalabraOculta(palabraOculta);
-            mostrarLetrasUtilizadas(letrasUtilizadas);
             
-            //let letra = prompt("Ingresa una letra");
-            console.log(clickLletra(abecedari));
-            if (clickLletra(abecedari)) {
-                if (letrasUtilizadas.includes(clickLletra(abecedari))) {
+        let letrasUtilizadas = [];
+        let intentos = 6;
+        while (palabra.includes('_') || intentos > 0) {
+            mostrarPalabraOculta(palabraOculta);
+            LetrasUtilizadas(letrasUtilizadas);
+            let letraClickeada = clickLletra(letra);
+
+            if (letraClickeada && esLetraValida(letraClickeada)) {
+                if (letrasUtilizadas.includes(letraClickeada)) {
                     alert("Ya has intentado esa letra. Intenta con otra.");
                     continue;
                 }
-                if (!palabra.includes(clickLletra(abecedari))) {
-                    intentos--;//esto es igual a sumar uno mas a la imagen
+                if (!palabra.includes(letraClickeada)) {
+                    intentos--;
+                    mostrarImagen(intentos);
                 }
-                letrasUtilizadas += clickLletra(abecedari);
-                remplazarLetra(clickLletra(abecedari), palabra, palabraOculta);
+                letrasUtilizadas += letraClickeada;
+                palabraOculta = remplazarLetra(letraClickeada, palabra, palabraOculta);
             } else {
                 alert("Por favor, ingresa una letra válida.");
             }
@@ -52,18 +49,34 @@ function iniciarJoc() {
         }
     }
 }
-/*____________________________________________________________________________*/
+
+function mostrarEstadisticas() {
+    document.write("Has seleccionado ver las estadísticas." + "<br>");
+    document.write("Partidas jugadas: " + jugadas + "<br>");
+    document.write("Partidas ganadas: " + ganadas + "<br>");
+    document.write("Partidas perdidas: " + perdidas + "<br>");
+    document.write("Porcentaje de partidas ganadas: " + calcularPorcentaje(ganadas, jugadas) + "%" + "<br>");
+    document.write("Porcentaje de partidas perdidas: " + calcularPorcentaje(perdidas, jugadas) + "%");
+ }
+ 
+
+function calcularPorcentaje(valor, total) {
+    if (total > 0) {
+        return ((valor / total) * 100).toFixed(2);
+    } else if (valor === 0) {
+        return "0.00";
+    } else {
+        return "N/A";
+    }
+}
+
 function encriptaPalabra(palabra) {
     
-    let palabraOculta= "<h1>" + "_ ".repeat(palabra.length)/*.split("")*/+ "</h1>";
-    document.getElementById("muestraEncriptado").innerHTML= palabraOculta;
+    let palabraOculta= "<h1>" + "_".repeat(palabra.length).split("")+ "</h1>";
+    document.getElementById("jocPenjat").innerHTML= palabraOculta;
 }
-/*____________________________________________________________________________*/
 
-function mostrarPalabraOculta(palabraOculta) {
-    alert(palabraOculta.join(" "));
-}
-/*____________________________________________________________________________*/
+
 
 function esPalabra(palabra) {
     let codigoAscii;
@@ -72,7 +85,7 @@ function esPalabra(palabra) {
     }
     return (codigoAscii >= 65 && codigoAscii <= 90) || (codigoAscii >= 97 && codigoAscii <= 122);//verififca que las letras sean letras
 }
-/*____________________________________________________________________________*/
+
 
 function crearBoton(){
     let abecedari= "abcdefghijklmnñopqrstuvwxyz";
@@ -80,15 +93,51 @@ function crearBoton(){
     for(let i=0; i<abecedari.length; i++){
         abecedariHTML += '<button id="botonLetra" onclick="clickLletra(\'' + abecedari[i] + '\')">' + abecedari[i] + '</button>';
     }
-    document.getElementById("abecedari").innerHTML = abecedariHTML; 
-    //console.log(abecedariHTML);
+    document.getElementById("abecedari").innerHTML = abecedariHTML;
+    console.log(abecedariHTML);
+    return abecedariHTML; 
+   
 }
 
-function clickLetra(letra) {
-    // Puedes realizar acciones adicionales al hacer clic en una letra si es necesario
-    console.log("Letra clickeada: " + letra);
+function clickLletra(letra) {
+    //console.log("Letra clickeada: " + letra);
+    return letra;
 }
 
-function esLetraValida(letra, abecedari) {
+
+function esLetraValida(letra) {
+    let abecedari = "abcdefghijklmnñopqrstuvwxyz";
     return letra.length === 1 && abecedari.includes(letra.toLowerCase());
+}
+    
+
+function LetrasUtilizadas(letrasUtilizadas) {
+    let letrasUtilizadasElement = document.getElementById("lletresUtilitzades");
+    letrasUtilizadasElement.innerHTML = "Letras utilizadas: " + letrasUtilizadas.split("").join(", ");
+}
+
+ function mostrarPalabraOculta(palabraOculta) {
+     let palabraOcultaElement = document.getElementById("jocPenjat");
+     repalabraOculta= palabraOculta.join("");
+    palabraOcultaElement.innerHTML = "<h1>" + repalabraOculta + "</h1>";
+}
+
+function remplazarLetra(letra, palabra, palabraOculta) {
+    let nuevaPalabraOculta = "";
+    for (let i = 0; i < palabra.length; i++) {
+        if (palabra[i] === letra) {
+            nuevaPalabraOculta += letra;
+        } else {
+            nuevaPalabraOculta += palabraOculta[i];
+        }
+    }
+    return nuevaPalabraOculta;
+}
+
+function mostrarImagen(intentos) {
+    let imagenPenjatElement = document.getElementById("imatgePenjat").innerHTML;
+    let rutaImagenes = "img/";
+    let imagenActual = "penjat_" + (6 - intentos) + ".png";
+    imagenPenjatElement.src = rutaImagenes + imagenActual;
+    imagenPenjatElement.alt = "Imatge de'l penjat";  
 }

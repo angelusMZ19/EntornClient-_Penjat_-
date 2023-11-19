@@ -25,8 +25,7 @@ body{
     cursor: pointer;
 }
 #jocPenjat{
-/* vacio por el momento ya que este es para la imagen  */
-text-align: center;
+    text-align: center;
 }
 #abecedari{
     text-align: center;
@@ -35,7 +34,11 @@ text-align: center;
     padding: 5px 10px;
     border-radius: 5px;
     text-align: center;
+    background-color: cornsilk ;
 }
 #muestraEncriptado{
+    text-align: center;
+}
+#img{
     text-align: center;
 }
